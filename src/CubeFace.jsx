@@ -1,3 +1,5 @@
+import { useRef } from "react"
+
 /** create a flot number vertice array
  * input: start position of the cube(left fron corner)
  *        dir: direction of the face
@@ -100,10 +102,38 @@ export default function CubeFace(props) {
     const start_pos = props.start_pos
     const dir = props.dir
 
-    let vertices = createArray(start_pos, dir)//getr
+    const face = useRef()//reference of the surface, for event handle
 
-    return <mesh position={props.position}>
-        <bufferGeometry>
+    let vertices = createArray(start_pos, dir)//get right vertice array
+
+    /*
+    click event: show text
+    hoverevent : change color
+    */
+    const clickEvent = () => {
+        console.log('clicked');
+    }
+
+    const onHover = (event) => {
+        event.stopPropagation()//stop the raycast
+        face.current.material.color.set('red')
+    }
+
+    const outHover = () => {
+        face.current.material.color.set('white')
+    }
+
+
+
+
+    return <mesh position={props.position}
+        ref={face}
+        onClick={clickEvent}
+        onPointerOver={onHover}
+        onPointerOut={outHover}
+    >
+        <bufferGeometry >
+            {/* Geometry can have three attribure: position, color, normal */}
             <bufferAttribute
                 attach={'attributes-position'}
                 array={vertices}
@@ -112,7 +142,7 @@ export default function CubeFace(props) {
 
             />
         </bufferGeometry>
-        <meshBasicMaterial wireframe />
+        <meshBasicMaterial />
     </mesh>
 
 }
