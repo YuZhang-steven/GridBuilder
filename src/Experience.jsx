@@ -13,9 +13,9 @@ export default function Experience(props) {
             preset={'upfront'}
         >
             <GridSystem
-                x={4}
+                x={2}
                 y={4}
-                z={4}
+                z={6}
             />
 
         </Stage>
