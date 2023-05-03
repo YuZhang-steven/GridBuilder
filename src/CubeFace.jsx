@@ -1,4 +1,5 @@
-import { useRef } from "react"
+import { act } from "@react-three/fiber"
+import { useRef, useState } from "react"
 
 /** create a flot number vertice array
  * input: start position of the cube(left fron corner)
@@ -99,27 +100,45 @@ props:
 output: a buffergeometry surface
 */
 export default function CubeFace(props) {
+
+
     const start_pos = props.start_pos
     const dir = props.dir
+
+    const [active, setActive] = useState(false)
+    const color = active ? 'red' : 'white'
+
+
+
+    const show = props.show
+    const setShow = props.setShow
 
     const face = useRef()//reference of the surface, for event handle
 
     let vertices = createArray(start_pos, dir)//get right vertice array
+
 
     /*
     click event: show text
     hoverevent : change color
     */
     const clickEvent = () => {
-        console.log('clicked');
+        if (show) {
+            console.log('clicked');
+        }
+
     }
 
     const onHover = (event) => {
         event.stopPropagation()//stop the raycast
+        setActive(true)
+        setShow(true)
         face.current.material.color.set('red')
     }
 
     const outHover = () => {
+        setActive(false)
+        setShow(false)
         face.current.material.color.set('white')
     }
 
@@ -142,7 +161,14 @@ export default function CubeFace(props) {
 
             />
         </bufferGeometry>
-        <meshBasicMaterial />
+        {show && <meshBasicMaterial
+            transparent
+            opacity={0.25}
+            color={color}
+        />}
+        {!show && <meshBasicMaterial
+            visible={false}
+        />}
     </mesh>
 
 }
