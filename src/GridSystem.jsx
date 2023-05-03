@@ -1,4 +1,4 @@
-import Cube from "./Cube"
+import ClickBox from "./ClickBox"
 
 /**
  * Generate a cube system with x,y,z range.
@@ -29,7 +29,7 @@ export default function GridSystem(props) {
 
     /** transform the start point array to a Cube components array */
     const cube_list = position_arr.map(
-        postion => <Cube pos={postion} key={postion.toString()} />
+        postion => <ClickBox pos={postion} key={postion.toString()} />
     )
 
     return <>

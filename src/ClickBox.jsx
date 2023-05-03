@@ -8,7 +8,7 @@ import CubeFace from "./CubeFace";
  * 
  * @returns Box gyometry with 6 faces.
  */
-export default function Cube(props) {
+export default function ClickBox(props) {
     const [show, setShow] = useState(false)
 
     const position = props.pos

@@ -105,11 +105,11 @@ export default function CubeFace(props) {
     const start_pos = props.start_pos
     const dir = props.dir
 
-    const [active, setActive] = useState(false)
+    const [active, setActive] = useState(false) //individual face active state control
     const color = active ? 'red' : 'white'
 
 
-
+    /**Whole cube active state control */
     const show = props.show
     const setShow = props.setShow
 
@@ -133,13 +133,13 @@ export default function CubeFace(props) {
         event.stopPropagation()//stop the raycast
         setActive(true)
         setShow(true)
-        face.current.material.color.set('red')
+        // face.current.material.color.set('red')
     }
 
     const outHover = () => {
         setActive(false)
         setShow(false)
-        face.current.material.color.set('white')
+        // face.current.material.color.set('white')
     }
 
 
