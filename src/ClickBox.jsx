@@ -11,7 +11,7 @@ import CubeFace from "./CubeFace";
 export default function ClickBox(props) {
     const [show, setShow] = useState(false)
 
-    const position = props.pos
+    const position = [0, 0, 0]
     return <>
         {/* generate box face with start position and a normal direction. */}
         <CubeFace start_pos={position} dir={'front'} show={show} setShow={setShow} />
